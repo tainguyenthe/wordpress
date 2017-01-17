@@ -3,13 +3,14 @@ services:
   app:
     image: wordpress
     container_name: tainguyen_www
-#    volumes:
-#      - ~/wordpress/wp_html:/var/www/html
+    volumes:
+      - ./src:/var/www/html
     links:
       - wordpress_db:mysql
     ports:
       - 8080:80
     environment:
+      WORDPRESS_DB_NAME: tainguyen
       WORDPRESS_DB_PASSWORD: gu123451
 
   wordpress_db:
