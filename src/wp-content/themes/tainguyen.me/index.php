@@ -20,6 +20,7 @@
   <!--</div>-->
   <!---->
   <!--<div id="delimiter"></div>-->
+
   <!-- Example row of columns -->
   <div class="row">
     <div class="col-md-4">
