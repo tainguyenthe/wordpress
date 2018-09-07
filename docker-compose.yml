@@ -1,43 +1,43 @@
 version: "2"
 
 services:
-  tainguyen_www:
+  www:
     image: wordpress
-    container_name: tainguyen_www
+    container_name: www
     volumes:
       - ./src:/var/www/html
       - ./src/log:/var/log/apache2
     working_dir: /var/www/html
     links:
-      - tainguyen_mysql:mysql
+      - mysql:mysql
     ports:
-      - 8080:80
+      - 8888:80
     environment:
       - ALLOW_OVERRIDE=true
-      - WORDPRESS_DB_NAME=tainguyen
-      - WORDPRESS_DB_PASSWORD=gu123451
+      - WORDPRESS_DB_NAME=wordpress
+      - WORDPRESS_DB_PASSWORD=spz@123451
     depends_on:
-      - tainguyen_mysql
+      - mysql
 
-  tainguyen_mysql:
-    image: mysql
-    container_name: tainguyen_mysql
+  mysql:
+    image: mysql:5.6
+    container_name: mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=gu123451
-      - MYSQL_DATABASE=tainguyen
+      - MYSQL_ROOT_PASSWORD=spz@123451
+      - MYSQL_DATABASE=wordpress
     volumes:
       - ./stack/mysql/data:/var/lib/mysql
       - ./stack/mysql/entrypoint:/docker-entrypoint-initdb.d
 
-  tainguyen_devtools:
+  devtools:
       image: rualatngua/devtools:2.0
-      container_name: tainguyen_devtools
+      container_name: devtools
       links:
-        - tainguyen_mysql:mysql
+        - mysql:mysql
       ports:
-        - 8081:80
+        - 8889:80
       environment:
         - MYSQL_USERNAME=root
-        - MYSQL_ROOT_PASSWORD=gu123451
+        - MYSQL_ROOT_PASSWORD=spz@123451
       depends_on:
-        - tainguyen_mysql
+        - mysql
